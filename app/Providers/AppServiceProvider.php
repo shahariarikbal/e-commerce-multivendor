@@ -46,6 +46,6 @@ class AppServiceProvider extends ServiceProvider
         Voyager::addAction(\App\Actions\PayCommision::class);
         
         // to disable the debugbar
-        app('debugbar')->disable();
+        app('debugbar')->enable();
     }
 }

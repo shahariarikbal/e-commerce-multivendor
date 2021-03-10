@@ -1,8 +1,10 @@
 <?php
 
 use App\Order;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use TCG\Voyager\Facades\Voyager;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,7 +60,13 @@ Route::group(['prefix' => 'admin'], function () {
 
     Voyager::routes();
 
+    
     // Route::get('/order/pay/{suborder}', 'SubOrderController@pay')->name('order.pay');
+});
+
+// V2
+Route::group(['namespace' => 'Admin\V2', 'prefix' => 'admin/', 'middleware' => ['auth']], function(){
+    Route::post('/posts', 'PostController@store')->name('voyager.posts.store');
 });
 
 

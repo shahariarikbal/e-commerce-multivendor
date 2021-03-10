@@ -156,10 +156,11 @@
                                      @php
                                      $cat = DB::table("post_categories")->get();
                                      @endphp
+                                     @if(!empty($cat))
                                      @foreach ($cat as $item)
                                          <a href="{{ route('post.by.cat', ['id' => $item->id]) }}" class="cat-sub">{{$item->name}}</a>
                                      @endforeach
-
+                                     @endif
                                  </div>
                                  <div>
                                      <a href="#" class="cat-head">Videos</a>
@@ -209,9 +210,12 @@
                                         $page = DB::table('custom_pages')->where('label', 'Financing')->first();
                                         $page2 = DB::table('custom_pages')->where('label', 'RE-MESHING')->first();
                                      @endphp
+                                     @if($page)
                                      <a href="{{route('custom.pages', ['id' => $page->id])}}" class="cat-sub active" >Financing</a>
+                                     @endif
+                                     @if($page2)
                                      <a href="{{route('custom.pages', ['id' => $page2->id])}}" class="cat-sub active" >SCREEN RE-MESHING</a>
-
+                                     @endif
                                  </div>
                                  <div>
                                      <p class="my-2"><i data-feather='phone' class="mx-2"></i> 02 8413289,
