@@ -14,9 +14,9 @@ class SiteReviewsTableSeeder extends Seeder
     {
         
 
-        \DB::table('site_reviews')->delete();
+        \DB::table('reviews')->delete();
         
-        \DB::table('site_reviews')->insert(array (
+        \DB::table('reviews')->insert(array (
             0 => 
             array (
                 'comment' => 'hejhfcjhas',

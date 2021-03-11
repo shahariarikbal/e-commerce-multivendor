@@ -1,7 +1,11 @@
-<div class="product-card">
+<div class="">
 
     @if (!empty($product['cover_img']))
-        <img src="{{ asset('storage/' . $product['cover_img']) }}" alt="{{ $product['name'] }}">
+        <div class="zoom-img">
+            <a href="{{ asset('storage/' . $product['cover_img']) }}">
+                <img id="img-default" src="{{ asset('storage/' . $product['cover_img']) }}" alt="{{ $product['name'] }}">
+            </a>
+        </div>
     @else
         <div class="bg-dark w-100" style="height: 350px"></div>
     @endif
@@ -100,7 +104,7 @@
 
 
 
-{{-- <div class="card product-card p-3">
+{{--<div class="card product-card p-3">
     <div class="img">
         <a href="{{ route('prod.single', ['prodId' => $product->id]) }}">
             <img src="{{ asset('storage/' . $product->cover_img) }}" alt="{{ $product['name'] }}">
@@ -122,8 +126,8 @@
         <a href="{{ route('cart.add', $product->id) }}" class="btn btn-secondary cart"><i
                 data-feather="shopping-cart"></i></a>
     </div>
-</div> --}}
-{{-- <div class="product-card">
+</div>
+<div class="product-card">
     <div class="card">
         <img class="card-img-top" src="{{ asset('product.png') }}" alt="Card image cap">
         <div class="card-body">
@@ -147,8 +151,7 @@
         </div>
     </div>
 </div>
---}}
 
-{{-- <a href="{{ route('wishlists.store') }}" class="card-link">
+<a href="{{ route('wishlists.store') }}" class="card-link">
     wishlist
-</a> --}}
+</a>--}}

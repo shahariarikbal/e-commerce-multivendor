@@ -5,15 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Document</title>
-
-
-
+    <title>Order Receipt</title>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-
 </head>
 <body>
     <div class="container">
@@ -53,7 +48,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -92,13 +86,10 @@
                 </div>
             </div>
         </div>
-
         <a class="btn btn-info" href="{{ route('invoice.download', $orderDetails->id) }}">
             Download Invoice
         </a>
-
     </div>
-
 </body>
 </html>
 

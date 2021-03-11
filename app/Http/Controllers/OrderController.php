@@ -183,7 +183,9 @@ class OrderController extends Controller
                 $this->manage_stock($prod, $items->quentity);
             }
 
+            // Mail when order stored
             Mail::to($order->user->email)->send(new OrderPaid($order));
+
             $order->generateSubOrders();
             \Cart::session(auth()->id())->clear();
             return redirect()->route('home')->withMessage('Order has been placed');
@@ -376,9 +378,10 @@ class OrderController extends Controller
 
         $order_Items = DB::table('order_items')->join('products', 'order_items.product_id', '=', 'products.id')->where('order_id',request('id'))->get();
 
-        $pdf = PDF::loadView('order_invoice',  ['orderDetails' => $orderDetails, 'order_Items' => $order_Items]);
+        // $pdf = PDF::loadView('order_invoice',  ['orderDetails' => $orderDetails, 'order_Items' => $order_Items]);
+        $pdf = PDF::loadView('v2-pdf',  ['orderDetails' => $orderDetails, 'order_Items' => $order_Items]);
 
-        return $pdf->download('order_invoice.pdf');
+        return $pdf->stream('order_invoice.pdf');
     }
     
     

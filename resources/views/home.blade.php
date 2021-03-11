@@ -137,8 +137,12 @@
                         <div class="carousel-item w-100  {{ $key == 0 ? 'active' : '' }}" style="height: 530px;">
                             <div class="po">
                                 @foreach ($item as $post)
-                                    <div class="po-card">
-                                        <img src="{{ asset('storage/' . $post->image) }}" style="border-radius: 15px;">
+                                    <div class="po-card zoom-img">
+                                    @foreach((object) json_decode($post->image) as $img)
+                                    <a href="{{ asset('storage/posts/' . $img) }}">
+                                        <img id="img-default" src="{{ asset('storage/posts/' . $img) }}" style="border-radius: 15px;width: 48%;">
+                                    </a>
+                                    @endforeach
                                         <h4 class="my-4 text-center">{{ $post->title }}</h4>
                                         <a href="{{ route('post', $post->slug) }}" class="btn btn-primary w-100">Learn More</a>
                                     </div>
@@ -151,4 +155,5 @@
             </div>
         </div>
     </div>
+    
 @endsection

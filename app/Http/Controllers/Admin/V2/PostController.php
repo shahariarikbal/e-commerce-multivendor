@@ -23,37 +23,33 @@ class PostController extends Controller
             ]);
         }
 
-        try {
-            $pdfName = $request->file('pdf')[0]->getClientOriginalName();
-            $pdfRename = time().'_'.$pdfName;
-            $request->file('pdf')[0]->storeAs('public/posts/', $pdfRename);
+        $pdfName = $request->file('pdf')[0]->getClientOriginalName();
+        $pdfRename = time().'_'.$pdfName;
+        $request->file('pdf')[0]->storeAs('public/posts/', $pdfRename);
 
-            $images = [];
-            foreach ($request->file('image') as $image) {
-                $imageName = $image->getClientOriginalName();
-                $imageRename = time().'_'.$imageName;
-                $image->storeAs('public/posts/', $imageRename);
-                $images[] = $imageRename;
-            }
-
-            $post = [
-                'author_id'        => auth()->user()->id,
-                'title'            => $request->title,
-                'body'             => $request->body,
-                'excerpt'          => $request->excerpt,
-                'slug'             => $request->slug,
-                'status'           => $request->status,
-                'post_cat_id'      => $request->category_id,
-                'meta_description' => $request->meta_description,
-                'meta_keywords'    => $request->meta_keywords,
-                'seo_title'        => $request->seo_title,
-                'pdf'              => $pdfRename,
-                'image'            => json_encode($images)
-            ];
-
-            Post::create($post);
-        } catch (\Throwable $th) {
-            return 'Something went wrong'.' '.$th;
+        $images = [];
+        foreach ($request->file('image') as $image) {
+            $imageName = $image->getClientOriginalName();
+            $imageRename = time().'_'.$imageName;
+            $image->storeAs('public/posts/', $imageRename);
+            $images[] = $imageRename;
         }
+
+        $post = new Post();
+        $post->author_id = auth()->user()->id;
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->excerpt = $request->excerpt;
+        $post->slug = $request->slug;
+        $post->status = $request->status;
+        $post->post_cat_id = $request->post_cat_id;
+        $post->meta_description = $request->meta_description;
+        $post->meta_keywords = $request->meta_keywords;
+        $post->seo_title = $request->seo_title;
+        $post->pdf = $pdfRename;
+        $post->image = json_encode($images);
+        $post->save();
+
+        return redirect()->back()->with('success', 'Post stored successfully .');
     }
 }

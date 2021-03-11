@@ -14,7 +14,13 @@
             @foreach ($posts as $item)
                 <div class="card column align-items-center justify-content-start p-1" style="border-radius: 15px;"
                     id='post'>
-                    <img src="{{ asset('storage/' . $item->image) }}" style="border-radius: 15px;">
+                    @foreach((object) json_decode($item->image) as $img)
+                    <div class="zoom-img">
+                        <a href="{{ asset('storage/posts/' . $img) }}">
+                            <img id="img-default" src="{{ asset('storage/posts/' . $img) }}" alt="Image not found" style="border-radius: 15px;width: 100%;">
+                        </a>
+                    </div>
+                    @endforeach
                     <h4 class="my-2">{{ $item->title }}</h4>
                     <a href="{{ route('post', ['slug' => $item->slug]) }}" class="btn btn-secondary w-100">Learn more <i
                             class="mx-2" data-feather="arrow-right"></i></a>
@@ -29,17 +35,14 @@
                 @if (strlen($item->pdf) > 2)
                     <div class="card column align-items-center justify-content-start p-1" style="border-radius: 15px;"
                         id='post'>
-                        <img src="{{ asset('storage/' . $item->image) }}" style="border-radius: 15px;">
-                        {{-- @php
-                        dd($item->pdf)
-                        @endphp --}}
-                        @php
-                        $file = null;
-                        if(strlen($item->pdf)>2){
-                        $file = (json_decode($item->pdf))[0]->download_link;
-                        }
-                        @endphp
-                        <a href="{{ asset('storage/' . $file) }}" class="btn btn-secondary w-100">Download <i class="mx-2"
+                        @foreach((object) json_decode($item->image) as $img)
+                        <div class="zoom-img">
+                            <a href="{{ asset('storage/posts/' . $img) }}">
+                                <img id="img-default" src="{{ asset('storage/posts/' . $img) }}" alt="Image not found" style="border-radius: 15px;width: 100%;">
+                            </a>
+                        </div>
+                        @endforeach
+                        <a href="{{ asset('storage/posts/' . $item->pdf) }}" class="btn btn-secondary w-100">Download <i class="mx-2"
                                 data-feather="download" downlaod></i></a>
                     </div>
                 @endif
